@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digit Classifier Torch</title>
+  </head>
+  <body>
+    <div id="app">
+      <div id="welcome">
+        <h1>Digit Classifier Torch</h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio
+          neque consequuntur aut! Quis officiis deleniti officia, error ipsa
+          pariatur, vitae atque quia, ipsam tempore illum asperiores. Veniam
+          aperiam inventore nam vel voluptates eaque, esse, iure dolorem natus
+          rerum consequatur iste quod vitae culpa totam impedit facere
+          aspernatur qui corrupti commodi quo officiis! Cumque odio sunt
+          explicabo, quam eaque porro provident quas voluptate minima, vero
+          earum numquam quibusdam aliquam fugit est sequi illum! Quas velit iure
+          vitae nemo id expedita reiciendis amet a consequuntur error similique
+          deleniti eum tenetur, ea, nisi fugit nam mollitia necessitatibus?
+          Ipsum eaque possimus cum porro molestiae!
+        </p>
+        <button>Load Model...</button>
+      </div>
+      <div id="model">
+        <canvas id="draw"></canvas>
+        <div id="predictions"></div>
+        <div id="tools">
+          <button id="clear">Clear</button>
+          <div class="input" id="width">
+            <div>Width: <span class="val">5</span></div>
+            <input type="range" id="input-width" min="1" max="10" />
+          </div>
+          <select name="models" id="models"></select>
+        </div>
+      </div>
+    </div>
+    <footer>&copy; 2024 Digit Classifier powered by PyTorch</footer>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>

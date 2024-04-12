@@ -1,0 +1,157 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Ubuntu Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  background: #121212;
+  color: white;
+  overflow: hidden;
+}
+
+#app > #welcome {
+  max-width: 800px;
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#app > #welcome > button {
+  background: #fff;
+  border: none;
+  font-size: 20px;
+  padding: 5px 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+#app > #welcome > button:active {
+  background: #f0f0f0;
+  transform: scale(0.95);
+}
+
+#app > #model {
+  display: none;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+#app > #model > canvas#draw {
+  display: block;
+  background: #101010;
+  border: 2px solid #333;
+  border-radius: 5px;
+}
+
+#app > #model > #predictions {
+  position: absolute;
+  display: flex;
+  top: 50px;
+  left: 50%;
+  transform: translate(-50%, -25px);
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#app > #model > #predictions > .digit {
+  background: #333;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+  border: 2px solid #a90000;
+  transition: all 0.3s ease-in-out;
+  color: #a90000;
+}
+
+#app > #model > #predictions > .digit > .perc {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: #a90000;
+  height: 0%;
+  opacity: 0.5;
+  transition: all 0.3s ease-in-out;
+}
+
+#app > #model > #predictions > .digit > p {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+#app > #model > #predictions > .digit.selected {
+  border: 2px solid #00a900;
+  color: #00a900;
+}
+
+#app > #model > #predictions > .digit.selected > .perc {
+  background: #00a900;
+}
+
+#app > #model > #tools {
+  position: absolute;
+  display: flex;
+  bottom: 50px;
+  left: 50%;
+  transform: translate(-50%, 25px);
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  height: 50px;
+  align-items: center;
+}
+
+#app > #model > #tools > button {
+  background: #fff;
+  border: none;
+  font-size: 20px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+#app > #model > #tools > button:active {
+  background: #f0f0f0;
+  transform: scale(0.95);
+}
+
+#app > #model > #tools > .input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#app > #model > #tools > .input > .val {
+  font-size: 20px;
+}
+
+#app > #model > #tools > .input > input {
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+}
