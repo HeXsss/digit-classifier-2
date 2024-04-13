@@ -3,12 +3,30 @@ import $ from "jquery"
 import { Tensor, InferenceSession } from "onnxjs"
 
 const IMAGE_SIZE = 28
-const MODELS = [1, 2]
-const currentModel = window.localStorage.getItem("model") || 1
 
+const MODELS = [1, 2]
+
+let currentModel = window.localStorage.getItem("model") || 1
+
+const setLoading = (loading) => {
+  if (loading) {
+    $("#loading").css("display", "flex")
+    $("#loading").fadeIn()
+  } else {
+    $("#loading").fadeOut()
+  }
+}
+
+// URL alternative to see how does it compile to undefined route
 const loadModel = async () => {
+  setLoading(true)
   const session = new InferenceSession()
-  await session.loadModel(`/data/models/model${currentModel}.onnx`)
+  // FUCK THIS SHIT LOADING ty. vite
+  let url = `./models/model${currentModel}.onnx`
+  url = import.meta.url.includes("assets") ? `.${url}` : url
+  const modelUrl = new URL(url, import.meta.url).href
+  await session.loadModel(modelUrl)
+  setLoading(false)
   return session
 }
 
@@ -38,6 +56,7 @@ const welcome = async () => {
   })
   $("#app > #model > #tools > #models").val(`VERSION ${currentModel}`)
   $("#app > #model > #tools > #models").on("change", async (e) => {
+    console.log(e.target.value)
     currentModel = parseInt(e.target.value.split(" ")[1])
     window.localStorage.setItem("model", currentModel)
     session = await loadModel()
