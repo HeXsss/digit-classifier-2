@@ -36,12 +36,13 @@ const update = (canvas) => {
 
 const openButton = $("#app > #welcome > button")
 
-const resizeCanvas = (canvas) => {
+const resizeCanvas = (canvas, clear) => {
   const factor = Math.floor(
     (Math.min(window.innerWidth, window.innerHeight) - 200) / IMAGE_SIZE
   )
   canvas.width = factor * IMAGE_SIZE
   canvas.height = factor * IMAGE_SIZE
+  clear()
 }
 
 const welcome = async () => {
@@ -78,11 +79,19 @@ const welcome = async () => {
   const ctx = canvas.getContext("2d", {
     willReadFrequently: true
   })
-
+  const resetPredictions = () => {
+    $("#app > #model > #predictions > .digit").removeClass("selected")
+    $("#app > #model > #predictions > .digit > .perc").css("height", "0%")
+  }
+  const clear = () => {
+    ctx.fillStyle = "#000"
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
+    resetPredictions()
+  }
   update(canvas)
-  resizeCanvas(canvas)
+  resizeCanvas(canvas, clear)
   $(window).on("resize", (e) => {
-    resizeCanvas(canvas)
+    resizeCanvas(canvas, clear)
   })
 
   let isDrawing = false
@@ -116,10 +125,7 @@ const welcome = async () => {
     const sum = exp.reduce((a, b) => a + b, 0)
     return exp.map((p) => p / sum)
   }
-  const resetPredictions = () => {
-    $("#app > #model > #predictions > .digit").removeClass("selected")
-    $("#app > #model > #predictions > .digit > .perc").css("height", "0%")
-  }
+
   const updatePredictions = (probabilities) => {
     const labels = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     probabilities = softmax(probabilities)
@@ -158,11 +164,6 @@ const welcome = async () => {
     predict()
   }
 
-  const clear = () => {
-    ctx.fillStyle = "#000"
-    ctx.fillRect(0, 0, canvas.width, canvas.height)
-    resetPredictions()
-  }
   clear()
   $("#app > #model > #tools > button#clear").on("click", clear)
 
