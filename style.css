@@ -15,6 +15,10 @@ body {
   overflow: hidden;
 }
 
+#app {
+  overflow: hidden;
+}
+
 #app > #welcome {
   max-width: 800px;
   position: fixed;
@@ -70,6 +74,8 @@ body {
   background: #333;
   width: 50px;
   height: 50px;
+  width: 5vh;
+  height: 5vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -94,8 +100,9 @@ body {
 }
 
 #app > #model > #predictions > .digit > p {
-  font-size: 30px;
+  font-size: 3vh;
   font-weight: bold;
+  transition: all 0.3s ease-in-out;
 }
 
 #app > #model > #predictions > .digit.selected {

@@ -206,11 +206,8 @@ const welcome = async () => {
       updateWidth(e.target.value)
     })
 
-  const draw = (e) => {
+  const draw = (x, y) => {
     if (!isDrawing) return
-    // Coords of drawing
-    const x = e.offsetX
-    const y = e.offsetY
     if (prevX !== null && prevY !== null) {
       drawPath({
         x,
@@ -226,10 +223,22 @@ const welcome = async () => {
   }
 
   $(canvas).on("mousemove", (e) => {
-    draw(e)
+    draw(e.offsetX, e.offsetY)
   })
   $(canvas).on("touchmove", (e) => {
-    draw(e)
+    const { clientX, clientY } = e.touches[0]
+    const { left, top } = canvas.getBoundingClientRect()
+    // If out of bounds reset
+    if (
+      clientX < left ||
+      clientX > left + canvas.width ||
+      clientY < top ||
+      clientY > top + canvas.height
+    ) {
+      reset()
+      return
+    }
+    draw(clientX - left, clientY - top)
   })
 
   $(canvas).on("mouseleave", (e) => {
